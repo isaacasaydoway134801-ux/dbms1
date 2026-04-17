@@ -1,0 +1,89 @@
+SQL> SELECT SYSDATE + 15 AS NEW_DATE
+  2  FROM DUAL;
+
+NEW_DATE                                                                        
+---------                                                                       
+02-MAY-26                                                                       
+
+SQL> SELECT
+  2      ADD_MONTHS(SYSDATE, 5) AS ADD_5_MONTHS,
+  3      ADD_MONTHS(SYSDATE, -5) AS SUB_5_MONTHS
+  4  FROM DUAL;
+
+ADD_5_MON SUB_5_MON                                                             
+--------- ---------                                                             
+17-SEP-26 17-NOV-25                                                             
+
+SQL> SELECT ASCII('M') AS ASCII_VALUE
+  2  FROM DUAL;
+
+ASCII_VALUE                                                                     
+-----------                                                                     
+         77                                                                     
+
+SQL> SELECT
+  2      CHR(67) AS C1,
+  3      CHR(65) AS C2,
+  4      CHR(84) AS C3
+  5  FROM DUAL;
+
+C C C                                                                           
+- - -                                                                           
+C A T                                                                           
+
+SQL> SELECT LAST_DAY(SYSDATE) AS LAST_DAY
+  2  FROM DUAL;
+
+LAST_DAY                                                                        
+---------                                                                       
+30-APR-26                                                                       
+
+SQL> SELECT SYSDATE - TO_DATE('20/05/2015','DD/MM/YYYY') AS DAYS_DIFF
+  2  FROM DUAL;
+
+ DAYS_DIFF                                                                      
+----------                                                                      
+3985.70669                                                                      
+
+SQL> SELECT MONTHS_BETWEEN(
+  2      SYSDATE,
+  3      TO_DATE('03/03/2016','DD/MM/YYYY')
+  4  ) AS MONTHS_DIFF
+  5  FROM DUAL;
+
+MONTHS_DIFF                                                                     
+-----------                                                                     
+ 121.474416                                                                     
+
+SQL> SELECT INSTR('corporate floor','or',3,2) AS POSITION
+  2  FROM DUAL;
+
+  POSITION                                                                      
+----------                                                                      
+        14                                                                      
+
+SQL> SELECT INITCAP('marwadi university') AS RESULT
+  2  FROM DUAL;
+
+RESULT                                                                          
+------------------                                                              
+Marwadi University                                                              
+
+SQL> SELECT USER AS USERNAME, USERENV('SESSIONID') AS USER_ID
+  2  FROM DUAL;
+
+USERNAME                          USER_ID                                       
+------------------------------ ----------                                       
+SAYDOWAY                           590021                                       
+
+SQL> commit'
+  2  ;
+ERROR:
+ORA-01756: quoted string not properly terminated 
+
+
+SQL> commit;
+
+Commit complete.
+
+SQL> spool off;

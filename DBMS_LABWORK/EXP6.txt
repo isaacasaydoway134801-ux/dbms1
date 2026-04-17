@@ -1,0 +1,231 @@
+SQL> CREATE TABLE JOB (
+  2      JOB_ID VARCHAR2(10),
+  3      JOB_NAME VARCHAR2(25),
+  4      MIN_SAL NUMBER(10),
+  5      MAX_SAL NUMBER(10)
+  6  );
+
+Table created.
+
+SQL> 
+SQL> CREATE TABLE EMPLOYEE (
+  2      EMP_NO NUMBER,
+  3      EMP_NAME VARCHAR2(20),
+  4      EMP_SAL NUMBER(10),
+  5      EMP_COMM NUMBER(10),
+  6      DEPT_NO NUMBER
+  7  );
+
+Table created.
+
+SQL> 
+SQL> CREATE TABLE DEPOSIT (
+  2      A_NO NUMBER,
+  3      CNAME VARCHAR2(20),
+  4      BNAME VARCHAR2(20),
+  5      AMOUNT NUMBER(10),
+  6      ADATE DATE
+  7  );
+CREATE TABLE DEPOSIT (
+             *
+ERROR at line 1:
+ORA-00955: name is already used by an existing object 
+
+
+SQL> INSERT INTO JOB VALUES ('IT_PROG','PROGRAMMER',4000,10000);
+
+1 row created.
+
+SQL> INSERT INTO JOB VALUES ('MK_MGR','MARKETING MANAGER',9000,15000);
+
+1 row created.
+
+SQL> INSERT INTO JOB VALUES ('FI_MGR','FINANCE MANAGER',8200,12000);
+
+1 row created.
+
+SQL> INSERT INTO JOB VALUES ('FI_ACC','ACCOUNT',4200,9000);
+
+1 row created.
+
+SQL> INSERT INTO JOB VALUES ('LEC','LECTURER',6000,17000);
+
+1 row created.
+
+SQL> INSERT INTO JOB VALUES ('COMP_OP','COMPUTER OPERATOR',1500,3000);
+
+1 row created.
+
+SQL> INSERT INTO EMPLOYEE VALUES (101,'SMITH',800,NULL,20);
+
+1 row created.
+
+SQL> INSERT INTO EMPLOYEE VALUES (102,'SNEHAL',1600,300,25);
+
+1 row created.
+
+SQL> INSERT INTO EMPLOYEE VALUES (103,'ADAMA',1100,0,20);
+
+1 row created.
+
+SQL> INSERT INTO EMPLOYEE VALUES (104,'AMAN',3000,NULL,15);
+
+1 row created.
+
+SQL> INSERT INTO EMPLOYEE VALUES (105,'ANITA',5000,5000,10);
+
+1 row created.
+
+SQL> INSERT INTO EMPLOYEE VALUES (106,'SNEHA',2450,2450,10);
+
+1 row created.
+
+SQL> INSERT INTO EMPLOYEE VALUES (107,'ANAMIKA',2975,NULL,30);
+
+1 row created.
+
+SQL> SET LINESIZE 200
+SQL> SET PAGESIZE 100
+SQL> SELECT * FROM EMPLOYEE;
+
+    EMP_NO EMP_NAME                EMP_SAL   EMP_COMM    DEPT_NO                                                                                                                                        
+---------- -------------------- ---------- ---------- ----------                                                                                                                                        
+       101 SMITH                       800                    20                                                                                                                                        
+       102 SNEHAL                     1600        300         25                                                                                                                                        
+       103 ADAMA                      1100          0         20                                                                                                                                        
+       104 AMAN                       3000                    15                                                                                                                                        
+       105 ANITA                      5000       5000         10                                                                                                                                        
+       106 SNEHA                      2450       2450         10                                                                                                                                        
+       107 ANAMIKA                    2975                    30                                                                                                                                        
+
+7 rows selected.
+
+SQL> SELECT * FROM JOB;
+
+JOB_ID     JOB_NAME                     MIN_SAL    MAX_SAL                                                                                                                                              
+---------- ------------------------- ---------- ----------                                                                                                                                              
+IT_PROG    PROGRAMMER                      4000      10000                                                                                                                                              
+MK_MGR     MARKETING MANAGER               9000      15000                                                                                                                                              
+FI_MGR     FINANCE MANAGER                 8200      12000                                                                                                                                              
+FI_ACC     ACCOUNT                         4200       9000                                                                                                                                              
+LEC        LECTURER                        6000      17000                                                                                                                                              
+COMP_OP    COMPUTER OPERATOR               1500       3000                                                                                                                                              
+
+6 rows selected.
+
+SQL> SELECT * FROM DEPOSIT;
+
+ACTNO CNAME           BNAME               AMOUNT ADATE                                                                                                                                                  
+----- --------------- --------------- ---------- ---------                                                                                                                                              
+100   ANIL            VRCE                  1000 01-MAR-95                                                                                                                                              
+101   SUNIL           AJNI                  5000 04-JAN-96                                                                                                                                              
+102   MEHUL           KAROLBAGH             3500 17-NOV-95                                                                                                                                              
+104   MADHURI         CHANDI                1200 17-DEC-95                                                                                                                                              
+105   PRAMOD          M G ROAD              3000 27-MAR-96                                                                                                                                              
+106   SANDIP          ANDHERI               2000 31-MAR-96                                                                                                                                              
+107   SHIVANI         VIRAR                 1000 05-SEP-95                                                                                                                                              
+108   KRANTI          NEHRU PLACE           5000 02-JUL-95                                                                                                                                              
+109   MINU            POWAI                 7000 10-AUG-95                                                                                                                                              
+
+9 rows selected.
+
+SQL> SELECT A_NO, AMOUNT
+  2  FROM DEPOSIT
+  3  WHERE ADATE BETWEEN
+  4  TO_DATE('01-JAN-06','DD-MON-YY')
+  5  AND TO_DATE('25-JUL-06','DD-MON-YY');
+SELECT A_NO, AMOUNT
+       *
+ERROR at line 1:
+ORA-00904: "A_NO": invalid identifier 
+
+
+SQL> SELECT * FROM JOB
+  2  WHERE MIN_SAL > 4000;
+
+JOB_ID     JOB_NAME                     MIN_SAL    MAX_SAL                                                                                                                                              
+---------- ------------------------- ---------- ----------                                                                                                                                              
+MK_MGR     MARKETING MANAGER               9000      15000                                                                                                                                              
+FI_MGR     FINANCE MANAGER                 8200      12000                                                                                                                                              
+FI_ACC     ACCOUNT                         4200       9000                                                                                                                                              
+LEC        LECTURER                        6000      17000                                                                                                                                              
+
+SQL> SELECT EMP_NAME AS NAME, EMP_SAL
+  2  FROM EMPLOYEE
+  3  WHERE DEPT_NO = 20;
+
+NAME                    EMP_SAL                                                                                                                                                                         
+-------------------- ----------                                                                                                                                                                         
+SMITH                       800                                                                                                                                                                         
+ADAMA                      1100                                                                                                                                                                         
+
+SQL> SELECT EMP_NO, EMP_NAME, DEPT_NO
+  2  FROM EMPLOYEE
+  3  WHERE DEPT_NO IN (10,20);
+
+    EMP_NO EMP_NAME                DEPT_NO                                                                                                                                                              
+---------- -------------------- ----------                                                                                                                                                              
+       101 SMITH                        20                                                                                                                                                              
+       103 ADAMA                        20                                                                                                                                                              
+       105 ANITA                        10                                                                                                                                                              
+       106 SNEHA                        10                                                                                                                                                              
+
+SQL> SELECT * FROM EMPLOYEE
+  2  WHERE EMP_NAME LIKE 'A%';
+
+    EMP_NO EMP_NAME                EMP_SAL   EMP_COMM    DEPT_NO                                                                                                                                        
+---------- -------------------- ---------- ---------- ----------                                                                                                                                        
+       103 ADAMA                      1100          0         20                                                                                                                                        
+       104 AMAN                       3000                    15                                                                                                                                        
+       105 ANITA                      5000       5000         10                                                                                                                                        
+       107 ANAMIKA                    2975                    30                                                                                                                                        
+
+SQL> SELECT * FROM EMPLOYEE
+  2  WHERE EMP_NAME LIKE '__A%';
+
+    EMP_NO EMP_NAME                EMP_SAL   EMP_COMM    DEPT_NO                                                                                                                                        
+---------- -------------------- ---------- ---------- ----------                                                                                                                                        
+       103 ADAMA                      1100          0         20                                                                                                                                        
+       104 AMAN                       3000                    15                                                                                                                                        
+       107 ANAMIKA                    2975                    30                                                                                                                                        
+
+SQL> SELECT * FROM EMPLOYEE
+  2  WHERE EMP_NAME LIKE 'A_A%';
+
+    EMP_NO EMP_NAME                EMP_SAL   EMP_COMM    DEPT_NO                                                                                                                                        
+---------- -------------------- ---------- ---------- ----------                                                                                                                                        
+       103 ADAMA                      1100          0         20                                                                                                                                        
+       104 AMAN                       3000                    15                                                                                                                                        
+       107 ANAMIKA                    2975                    30                                                                                                                                        
+
+SQL> SELECT EMP_NAME, EMP_NO, EMP_SAL
+  2  FROM EMPLOYEE
+  3  WHERE EMP_NAME LIKE 'ANI__';
+
+EMP_NAME                 EMP_NO    EMP_SAL                                                                                                                                                              
+-------------------- ---------- ----------                                                                                                                                                              
+ANITA                       105       5000                                                                                                                                                              
+
+SQL> SELECT CNAME
+  2  FROM DEPOSIT
+  3  ORDER BY CNAME;
+
+CNAME                                                                                                                                                                                                   
+---------------                                                                                                                                                                                         
+ANIL                                                                                                                                                                                                    
+KRANTI                                                                                                                                                                                                  
+MADHURI                                                                                                                                                                                                 
+MEHUL                                                                                                                                                                                                   
+MINU                                                                                                                                                                                                    
+PRAMOD                                                                                                                                                                                                  
+SANDIP                                                                                                                                                                                                  
+SHIVANI                                                                                                                                                                                                 
+SUNIL                                                                                                                                                                                                   
+
+9 rows selected.
+
+SQL> COMMIT;
+
+Commit complete.
+
+SQL> SPOOL OFF;

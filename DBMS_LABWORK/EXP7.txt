@@ -1,0 +1,92 @@
+SQL> SELECT SUM(AMOUNT) AS TOTAL_DEPOSIT
+  2  FROM DEPOSIT;
+
+TOTAL_DEPOSIT                                                                   
+-------------                                                                   
+        28700                                                                   
+
+SQL> SELECT SUM(AMOUNT) AS TOTAL_LOAN
+  2  FROM BORROW
+  3  WHERE BNAME = 'KAROLBAGH';
+
+TOTAL_LOAN                                                                      
+----------                                                                      
+                                                                                
+
+SQL> SELECT MAX(AMOUNT) AS MAX_LOAN
+  2  FROM BORROW
+  3  WHERE BNAME = 'VRCE';
+
+  MAX_LOAN                                                                      
+----------                                                                      
+      1000                                                                      
+
+SQL> SELECT COUNT(*) AS TOTAL_CUSTOMERS
+  2  FROM CUSTOMERS;
+
+TOTAL_CUSTOMERS                                                                 
+---------------                                                                 
+             10                                                                 
+
+SQL> SELECT COUNT(DISTINCT CITY) AS TOTAL_CITIES
+  2  FROM CUSTOMERS;
+
+TOTAL_CITIES                                                                    
+------------                                                                    
+           7                                                                    
+
+SQL> CREATE TABLE SUPPLIER AS
+  2  SELECT * FROM EMPLOYEE;
+
+Table created.
+
+SQL> CREATE TABLE SUP1 AS
+  2  SELECT EMP_NO, EMP_NAME FROM EMPLOYEE;
+
+Table created.
+
+SQL> CREATE TABLE SUP2 AS
+  2  SELECT * FROM EMPLOYEE WHERE 1=0;
+
+Table created.
+
+SQL> INSERT INTO SUP2
+  2  SELECT * FROM EMPLOYEE
+  3  WHERE EMP_NAME LIKE '_N___';
+
+2 rows created.
+
+SQL> DELETE FROM SUP1;
+
+7 rows deleted.
+
+SQL> DELETE FROM SUPPLIER
+  2  WHERE EMP_NO = 103;
+
+1 row deleted.
+
+SQL> RENAME SUP2 TO SUPLIER_TWO;
+
+Table renamed.
+
+SQL> DROP TABLE SUP1;
+
+Table dropped.
+
+SQL> UPDATE EMPLOYEE
+  2  SET DEPT_NO = 10
+  3  WHERE EMP_NAME LIKE '_M%';
+
+2 rows updated.
+
+SQL> UPDATE EMPLOYEE
+  2  SET EMP_NAME = 'NEWNAME'
+  3  WHERE EMP_NO = 103;
+
+1 row updated.
+
+SQL> COMMIT;
+
+Commit complete.
+
+SQL> SPOOL OFF;

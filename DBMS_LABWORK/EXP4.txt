@@ -1,0 +1,133 @@
+SQL> CREATE TABLE PERSON (
+  2      PERSON_ID NUMBER,
+  3      FNAME VARCHAR2(20),
+  4      LNAME VARCHAR2(20),
+  5      CITY VARCHAR2(20),
+  6      SALARY NUMBER(10)
+  7  );
+
+Table created.
+
+SQL> INSERT INTO PERSON VALUES (1,'SNEHA','SHETH','RAJKOT',10000);
+
+1 row created.
+
+SQL> 
+SQL> INSERT INTO PERSON VALUES (2,'PUJA','PARMAR','AHMEDABAD',2000);
+
+1 row created.
+
+SQL> 
+SQL> INSERT INTO PERSON VALUES (3,'RIYA','GAJAR','PUNE',8000);
+
+1 row created.
+
+SQL> 
+SQL> INSERT INTO PERSON VALUES (4,'SANDIP','JADEJA','PUNE',5000);
+
+1 row created.
+
+SQL> 
+SQL> INSERT INTO PERSON VALUES (5,'ALPESH','PRAJAPATI','MUMBAI',20000);
+
+1 row created.
+ 
+SQL> SELECT * FROM PERSON;
+
+ PERSON_ID FNAME                LNAME                CITY                     SALARY                                                                                                                    
+---------- -------------------- -------------------- -------------------- ----------                                                                                                                    
+         1 SNEHA                SHETH                RAJKOT                    10000                                                                                                                    
+         2 PUJA                 PARMAR               AHMEDABAD                  2000                                                                                                                    
+         3 RIYA                 GAJAR                PUNE                       8000                                                                                                                    
+         4 SANDIP               JADEJA               PUNE                       5000                                                                                                                    
+         5 ALPESH               PRAJAPATI            MUMBAI                    20000                                                                                                                    
+
+SQL> SELECT PERSON_ID, FNAME
+  2  FROM PERSON;
+
+ PERSON_ID FNAME                                                                                                                                                                                        
+---------- --------------------                                                                                                                                                                         
+         1 SNEHA                                                                                                                                                                                        
+         2 PUJA                                                                                                                                                                                         
+         3 RIYA                                                                                                                                                                                         
+         4 SANDIP                                                                                                                                                                                       
+         5 ALPESH                                                                                                                                                                                       
+
+SQL> SELECT * FROM PERSON
+  2  ORDER BY SALARY;
+
+ PERSON_ID FNAME                LNAME                CITY                     SALARY                                                                                                                    
+---------- -------------------- -------------------- -------------------- ----------                                                                                                                    
+         2 PUJA                 PARMAR               AHMEDABAD                  2000                                                                                                                    
+         4 SANDIP               JADEJA               PUNE                       5000                                                                                                                    
+         3 RIYA                 GAJAR                PUNE                       8000                                                                                                                    
+         1 SNEHA                SHETH                RAJKOT                    10000                                                                                                                    
+         5 ALPESH               PRAJAPATI            MUMBAI                    20000                                                                                                                    
+
+SQL> SELECT DISTINCT CITY
+  2  FROM PERSON;
+
+CITY                                                                                                                                                                                                    
+--------------------                                                                                                                                                                                    
+RAJKOT                                                                                                                                                                                                  
+MUMBAI                                                                                                                                                                                                  
+AHMEDABAD                                                                                                                                                                                               
+PUNE                                                                                                                                                                                                    
+
+SQL> UPDATE PERSON
+  2  SET CITY = 'KOLKATA'
+  3  WHERE FNAME = 'SANDIP';
+
+1 row updated.
+
+SQL> COMMIT;
+
+Commit complete.
+
+SQL> SELECT * FROM PERSON
+  2  WHERE LNAME = 'PRAJAPATI';
+
+ PERSON_ID FNAME                LNAME                CITY                     SALARY                                                                                                                    
+---------- -------------------- -------------------- -------------------- ----------                                                                                                                    
+         5 ALPESH               PRAJAPATI            MUMBAI                    20000                                                                                                                    
+
+SQL> ALTER TABLE PERSON
+  2  ADD (
+  3      STATE VARCHAR2(20),
+  4      BIRTHDATE DATE,
+  5      PINCODE NUMBER(6)
+  6  );
+
+Table altered.
+
+SQL> COMMIT;
+
+Commit complete.
+
+SQL> SELECT * FROM PERSON
+  2  WHERE SALARY > 6000;
+
+ PERSON_ID FNAME                LNAME                CITY                     SALARY STATE                BIRTHDATE    PINCODE                                                                          
+---------- -------------------- -------------------- -------------------- ---------- -------------------- --------- ----------                                                                          
+         1 SNEHA                SHETH                RAJKOT                    10000                                                                                                                    
+         3 RIYA                 GAJAR                PUNE                       8000                                                                                                                    
+         5 ALPESH               PRAJAPATI            MUMBAI                    20000                                                                                                                    
+
+SQL> DELETE FROM PERSON
+  2  WHERE SALARY < 3000;
+
+1 row deleted.
+
+SQL> COMMIT;
+
+Commit complete.
+
+SQL> RENAME PERSON TO PERSON_MASTER;
+
+Table renamed.
+
+SQL> COMMIT;
+
+Commit complete.
+
+SQL> SPOOL OFF;

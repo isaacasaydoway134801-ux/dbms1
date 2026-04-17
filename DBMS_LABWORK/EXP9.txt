@@ -1,0 +1,127 @@
+SQL> CREATE TABLE CUSTOMER (
+  2      CUST_NO NUMBER(4) PRIMARY KEY,
+  3      FIRST_NAME VARCHAR2(20) NOT NULL,
+  4      LAST_NAME VARCHAR2(20),
+  5      ADDRESS VARCHAR2(50),
+  6      CITY VARCHAR2(10),
+  7      STATE VARCHAR2(20),
+  8      PIN NUMBER(6),
+  9      B_DATE DATE,
+ 10      STATUS CHAR(1),
+ 11      CONSTRAINT chk_status CHECK (STATUS IN ('V','I','A'))
+ 12  );
+
+Table created.
+
+SQL> INSERT INTO CUSTOMER VALUES
+  2  (1003,'RAJ','BAHADUR','SHANTI VILLA','UDP','KARNATAKA',576101,TO_DATE('01-AUG-70','DD-MON-YY'),'V');
+
+1 row created.
+
+SQL> 
+SQL> INSERT INTO CUSTOMER VALUES
+  2  (1004,'FELIX','SIMON','M-J-56','PJM','GOA',403002,TO_DATE('12-FEB-71','DD-MON-YY'),'A');
+
+1 row created.
+
+SQL> 
+SQL> INSERT INTO CUSTOMER VALUES
+  2  (1005,'RAJAN','KUTTY','A1 TRADERS','KNR','KERALA',670001,TO_DATE('09-JUN-71','DD-MON-YY'),'A');
+
+1 row created.
+
+SQL> 
+SQL> INSERT INTO CUSTOMER VALUES
+  2  (1006,'SHILPA','PAI','12/4B','MNG','KARNATAKA',574154,TO_DATE('11-DEC-70','DD-MON-YY'),'I');
+
+1 row created.
+
+SQL> 
+SQL> INSERT INTO CUSTOMER VALUES
+  2  (1007,'BOSCO','RAKSHIT','R.K. PLAZA','BNG','KARNATAKA',576201,TO_DATE('01-JAN-71','DD-MON-YY'),'A');
+
+1 row created.
+
+SQL> SET LINESIZE 200
+SQL> SET PAGESIZE 100
+SQL> SELECT * FROM CUSTOMER;
+
+   CUST_NO FIRST_NAME           LAST_NAME            ADDRESS                                            CITY       STATE                       PIN B_DATE    S                                          
+---------- -------------------- -------------------- -------------------------------------------------- ---------- -------------------- ---------- --------- -                                          
+      1003 RAJ                  BAHADUR              SHANTI VILLA                                       UDP        KARNATAKA                576101 01-AUG-70 V                                          
+      1004 FELIX                SIMON                M-J-56                                             PJM        GOA                      403002 12-FEB-71 A                                          
+      1005 RAJAN                KUTTY                A1 TRADERS                                         KNR        KERALA                   670001 09-JUN-71 A                                          
+      1006 SHILPA               PAI                  12/4B                                              MNG        KARNATAKA                574154 11-DEC-70 I                                          
+      1007 BOSCO                RAKSHIT              R.K. PLAZA                                         BNG        KARNATAKA                576201 01-JAN-71 A                                          
+
+SQL> SELECT * FROM CUSTOMER
+  2  WHERE STATE = 'KARNATAKA';
+
+   CUST_NO FIRST_NAME           LAST_NAME            ADDRESS                                            CITY       STATE                       PIN B_DATE    S                                          
+---------- -------------------- -------------------- -------------------------------------------------- ---------- -------------------- ---------- --------- -                                          
+      1003 RAJ                  BAHADUR              SHANTI VILLA                                       UDP        KARNATAKA                576101 01-AUG-70 V                                          
+      1006 SHILPA               PAI                  12/4B                                              MNG        KARNATAKA                574154 11-DEC-70 I                                          
+      1007 BOSCO                RAKSHIT              R.K. PLAZA                                         BNG        KARNATAKA                576201 01-JAN-71 A                                          
+
+SQL> DELETE FROM CUSTOMER
+  2  WHERE PIN = 576201;
+
+1 row deleted.
+
+SQL> UPDATE CUSTOMER
+  2  SET PIN = 476001
+  3  WHERE CUST_NO = 1004;
+
+1 row updated.
+
+SQL> UPDATE CUSTOMER
+  2  SET ADDRESS = 'KAVI MUDDANNA MARG',
+  3      PIN = 576104
+  4  WHERE CUST_NO = 1003;
+
+1 row updated.
+
+SQL> DELETE FROM CUSTOMER
+  2  WHERE STATE = 'GOA';
+
+1 row deleted.
+
+SQL> 
+SQL> ROLLBACK;
+
+Rollback complete.
+
+SQL> SELECT * FROM CUSTOMER
+  2  WHERE STATUS = 'I';
+
+no rows selected
+
+SQL> SELECT DISTINCT STATE FROM CUSTOMER;
+
+no rows selected
+
+SQL> SELECT * FROM CUSTOMER
+  2  ORDER BY STATE;
+
+no rows selected
+
+SQL> SELECT STATE FROM CUSTOMER
+  2  ORDER BY STATE DESC;
+
+no rows selected
+
+SQL> SELECT * FROM CUSTOMER
+  2  WHERE STATE = 'KARNATAKA'
+  3  AND STATUS = 'V';
+
+no rows selected
+
+SQL> RENAME CUSTOMER TO CUST;
+
+Table renamed.
+
+SQL> COMMIT;
+
+Commit complete.
+
+SQL> SPOOL OFF;

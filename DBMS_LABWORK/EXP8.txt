@@ -1,0 +1,140 @@
+SQL> SELECT DISTINCT D.CNAME
+  2  FROM DEPOSIT D
+  3  JOIN BRANCH B ON D.BNAME = B.BNAME
+  4  WHERE B.CITY = (
+  5      SELECT B2.CITY
+  6      FROM DEPOSIT D2
+  7      JOIN BRANCH B2 ON D2.BNAME = B2.BNAME
+  8      WHERE D2.CNAME = 'SUNIL'
+  9  );
+
+CNAME                                                                           
+---------------                                                                 
+ANIL                                                                            
+SUNIL                                                                           
+
+SQL> SELECT D.*, B.*
+  2  FROM DEPOSIT D, BORROW B, CUSTOMERS C
+  3  WHERE D.CNAME = C.CNAME
+  4  AND B.CNAME = C.CNAME
+  5  AND C.CITY = (
+  6      SELECT CITY FROM CUSTOMERS
+  7      WHERE CNAME = 'PRAMOD'
+  8  );
+
+ACTNO CNAME           BNAME               AMOUNT ADATE     LOANN CNAME          
+----- --------------- --------------- ---------- --------- ----- ---------------
+BNAME               AMOUNT                                                      
+--------------- ----------                                                      
+104   MADHURI         CHANDI                1200 17-DEC-95 321   MADHURI        
+ANDHERI               2000                                                      
+                                                                                
+105   PRAMOD          M G ROAD              3000 27-MAR-96 375   PRAMOD         
+VIRAR                 8000                                                      
+                                                                                
+
+SQL> SET LINESIZE 200
+SQL> SET PAGESIZE 100
+SQL> SELECT D.*, B.*
+  2  FROM DEPOSIT D, BORROW B, CUSTOMERS C
+  3  WHERE D.CNAME = C.CNAME
+  4  AND B.CNAME = C.CNAME
+  5  AND C.CITY = (
+  6      SELECT CITY FROM CUSTOMERS
+  7      WHERE CNAME = 'PRAMOD'
+  8  );
+
+ACTNO CNAME           BNAME               AMOUNT ADATE     LOANN CNAME           BNAME               AMOUNT                                                                                             
+----- --------------- --------------- ---------- --------- ----- --------------- --------------- ----------                                                                                             
+104   MADHURI         CHANDI                1200 17-DEC-95 321   MADHURI         ANDHERI               2000                                                                                             
+105   PRAMOD          M G ROAD              3000 27-MAR-96 375   PRAMOD          VIRAR                 8000                                                                                             
+
+SQL> SELECT EMP_NO, EMP_NAME
+  2  FROM EMPLOYEE
+  3  WHERE EMP_SAL > (SELECT AVG(EMP_SAL) FROM EMPLOYEE)
+  4  ORDER BY EMP_SAL;
+
+    EMP_NO EMP_NAME                                                                                                                                                                                     
+---------- --------------------                                                                                                                                                                         
+       106 SNEHA                                                                                                                                                                                        
+       107 ANAMIKA                                                                                                                                                                                      
+       104 AMAN                                                                                                                                                                                         
+       105 ANITA                                                                                                                                                                                        
+
+SQL> SELECT EMP_NAME, EMP_SAL
+  2  FROM EMPLOYEE
+  3  WHERE MGR = (
+  4      SELECT EMP_NO FROM EMPLOYEE
+  5      WHERE EMP_NAME = 'FORD'
+  6  );
+WHERE MGR = (
+      *
+ERROR at line 3:
+ORA-00904: "MGR": invalid identifier 
+
+
+SQL> SELECT E.DEPT_NO, E.EMP_NAME, E.JOB
+  2  FROM EMPLOYEE E, DEPT D
+  3  WHERE E.DEPT_NO = D.DEPT_NO
+  4  AND D.DNAME = 'ACCOUNTING';
+FROM EMPLOYEE E, DEPT D
+                 *
+ERROR at line 2:
+ORA-00942: table or view does not exist 
+
+
+SQL> SELECT C.CNAME
+  2  FROM CUSTOMERS C
+  3  WHERE C.CITY = 'NAGPUR'
+  4  AND C.CNAME IN (SELECT CNAME FROM DEPOSIT)
+  5  AND C.CNAME IN (SELECT CNAME FROM BORROW);
+
+CNAME                                                                                                                                                                                                   
+---------------                                                                                                                                                                                         
+MADHURI                                                                                                                                                                                                 
+PRAMOD                                                                                                                                                                                                  
+
+SQL> SELECT C.CNAME, C.CITY
+  2  FROM CUSTOMERS C, BRANCH B, DEPOSIT D
+  3  WHERE C.CNAME = D.CNAME
+  4  AND D.BNAME = B.BNAME
+  5  AND C.CITY = B.CITY;
+
+CNAME           CITY                                                                                                                                                                                    
+--------------- ---------------                                                                                                                                                                         
+SHIVANI         BOMBAY                                                                                                                                                                                  
+
+SQL> SELECT E.EMP_NAME, E.DEPT_NO, D.DNAME
+  2  FROM EMPLOYEE E, DEPT D
+  3  WHERE E.DEPT_NO = D.DEPT_NO;
+FROM EMPLOYEE E, DEPT D
+                 *
+ERROR at line 2:
+ORA-00942: table or view does not exist 
+
+
+SQL> SELECT DISTINCT E.JOB, D.LOC
+  2  FROM EMPLOYEE E, DEPT D
+  3  WHERE E.DEPT_NO = D.DEPT_NO
+  4  AND E.DEPT_NO = 30;
+FROM EMPLOYEE E, DEPT D
+                 *
+ERROR at line 2:
+ORA-00942: table or view does not exist 
+
+
+SQL> SELECT E.EMP_NAME, E.DEPT_NO, D.DNAME
+  2  FROM EMPLOYEE E, DEPT D
+  3  WHERE E.DEPT_NO = D.DEPT_NO
+  4  AND D.LOC = 'CALCUTTA';
+FROM EMPLOYEE E, DEPT D
+                 *
+ERROR at line 2:
+ORA-00942: table or view does not exist 
+
+
+SQL> COMMIT;
+
+Commit complete.
+
+SQL> SPOOL OFF;

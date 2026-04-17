@@ -1,0 +1,211 @@
+SQL> CREATE TABLE BANK_BRANCH (
+  2      BRANCH_ID VARCHAR2(5),
+  3      BRANCH_NAME VARCHAR2(20),
+  4      BRANCH_ADDRESS VARCHAR2(30),
+  5      BRANCH_CITY VARCHAR2(20),
+  6      BRANCH_STATE VARCHAR2(20),
+  7      BRANCH_OPEN_DATE DATE
+  8  );
+
+Table created.
+
+SQL> INSERT INTO BANK_BRANCH VALUES
+  2  ('B001','BOI','JAGNATHROAD','RAJKOT','GUJARAT',TO_DATE('22-MAR-2015','DD-MON-YYYY'));
+
+1 row created.
+
+SQL> 
+SQL> INSERT INTO BANK_BRANCH VALUES
+  2  ('B002','SBI','BORIWALI ROAD','MUMBAI','MAHARASHTRA',TO_DATE('12-JAN-2000','DD-MON-YYYY'));
+
+1 row created.
+
+SQL> 
+SQL> INSERT INTO BANK_BRANCH VALUES
+  2  ('B003','HDFC','AGRAROAD','AGRA','U.P',TO_DATE('04-FEB-1998','DD-MON-YYYY'));
+
+1 row created.
+
+SQL> 
+SQL> INSERT INTO BANK_BRANCH VALUES
+  2  ('B004','DENABANK','CGROAD','AHMEDABAD','GUJARAT',TO_DATE('20-SEP-2012','DD-MON-YYYY'));
+
+1 row created.
+
+SQL> 
+SQL> INSERT INTO BANK_BRANCH VALUES
+  2  ('B005','ICICI','MAJAVDIROAD','JUNAGADH','GUJARAT',TO_DATE('07-MAY-2011','DD-MON-YYYY'));
+
+1 row created.
+
+SQL> SET LINESIZE 200;
+SQL> SET PAGESIZE 100;
+SQL> SELECT * FROM BANK_BRANCH;
+
+BRANC BRANCH_NAME          BRANCH_ADDRESS                 BRANCH_CITY          BRANCH_STATE         BRANCH_OP                                                                                           
+----- -------------------- ------------------------------ -------------------- -------------------- ---------                                                                                           
+B001  BOI                  JAGNATHROAD                    RAJKOT               GUJARAT              22-MAR-15                                                                                           
+B002  SBI                  BORIWALI ROAD                  MUMBAI               MAHARASHTRA          12-JAN-00                                                                                           
+B003  HDFC                 AGRAROAD                       AGRA                 U.P                  04-FEB-98                                                                                           
+B004  DENABANK             CGROAD                         AHMEDABAD            GUJARAT              20-SEP-12                                                                                           
+B005  ICICI                MAJAVDIROAD                    JUNAGADH             GUJARAT              07-MAY-11                                                                                           
+
+SQL> SELECT BRANCH_ID FROM BANK_BRANCH;
+
+BRANC                                                                                                                                                                                                   
+-----                                                                                                                                                                                                   
+B001                                                                                                                                                                                                    
+B002                                                                                                                                                                                                    
+B003                                                                                                                                                                                                    
+B004                                                                                                                                                                                                    
+B005                                                                                                                                                                                                    
+
+SQL> SELECT BRANCH_ID, BRANCH_ADDRESS
+  2  FROM BANK_BRANCH;
+
+BRANC BRANCH_ADDRESS                                                                                                                                                                                    
+----- ------------------------------                                                                                                                                                                    
+B001  JAGNATHROAD                                                                                                                                                                                       
+B002  BORIWALI ROAD                                                                                                                                                                                     
+B003  AGRAROAD                                                                                                                                                                                          
+B004  CGROAD                                                                                                                                                                                            
+B005  MAJAVDIROAD                                                                                                                                                                                       
+
+SQL> SELECT BRANCH_NAME, BRANCH_ADDRESS, BRANCH_CITY
+  2  FROM BANK_BRANCH;
+
+BRANCH_NAME          BRANCH_ADDRESS                 BRANCH_CITY                                                                                                                                         
+-------------------- ------------------------------ --------------------                                                                                                                                
+BOI                  JAGNATHROAD                    RAJKOT                                                                                                                                              
+SBI                  BORIWALI ROAD                  MUMBAI                                                                                                                                              
+HDFC                 AGRAROAD                       AGRA                                                                                                                                                
+DENABANK             CGROAD                         AHMEDABAD                                                                                                                                           
+ICICI                MAJAVDIROAD                    JUNAGADH                                                                                                                                            
+
+SQL> SELECT BRANCH_CITY, BRANCH_STATE, BRANCH_OPEN_DATE
+  2  FROM BANK_BRANCH;
+
+BRANCH_CITY          BRANCH_STATE         BRANCH_OP                                                                                                                                                     
+-------------------- -------------------- ---------                                                                                                                                                     
+RAJKOT               GUJARAT              22-MAR-15                                                                                                                                                     
+MUMBAI               MAHARASHTRA          12-JAN-00                                                                                                                                                     
+AGRA                 U.P                  04-FEB-98                                                                                                                                                     
+AHMEDABAD            GUJARAT              20-SEP-12                                                                                                                                                     
+JUNAGADH             GUJARAT              07-MAY-11                                                                                                                                                     
+
+SQL> SELECT * FROM BANK_BRANCH
+  2  ORDER BY BRANCH_ID;
+
+BRANC BRANCH_NAME          BRANCH_ADDRESS                 BRANCH_CITY          BRANCH_STATE         BRANCH_OP                                                                                           
+----- -------------------- ------------------------------ -------------------- -------------------- ---------                                                                                           
+B001  BOI                  JAGNATHROAD                    RAJKOT               GUJARAT              22-MAR-15                                                                                           
+B002  SBI                  BORIWALI ROAD                  MUMBAI               MAHARASHTRA          12-JAN-00                                                                                           
+B003  HDFC                 AGRAROAD                       AGRA                 U.P                  04-FEB-98                                                                                           
+B004  DENABANK             CGROAD                         AHMEDABAD            GUJARAT              20-SEP-12                                                                                           
+B005  ICICI                MAJAVDIROAD                    JUNAGADH             GUJARAT              07-MAY-11                                                                                           
+
+SQL> SELECT * FROM BANK_BRANCH
+  2  ORDER BY BRANCH_NAME;
+
+BRANC BRANCH_NAME          BRANCH_ADDRESS                 BRANCH_CITY          BRANCH_STATE         BRANCH_OP                                                                                           
+----- -------------------- ------------------------------ -------------------- -------------------- ---------                                                                                           
+B001  BOI                  JAGNATHROAD                    RAJKOT               GUJARAT              22-MAR-15                                                                                           
+B004  DENABANK             CGROAD                         AHMEDABAD            GUJARAT              20-SEP-12                                                                                           
+B003  HDFC                 AGRAROAD                       AGRA                 U.P                  04-FEB-98                                                                                           
+B005  ICICI                MAJAVDIROAD                    JUNAGADH             GUJARAT              07-MAY-11                                                                                           
+B002  SBI                  BORIWALI ROAD                  MUMBAI               MAHARASHTRA          12-JAN-00                                                                                           
+
+SQL> SELECT * FROM BANK_BRANCH
+  2  ORDER BY BRANCH_CITY;
+
+BRANC BRANCH_NAME          BRANCH_ADDRESS                 BRANCH_CITY          BRANCH_STATE         BRANCH_OP                                                                                           
+----- -------------------- ------------------------------ -------------------- -------------------- ---------                                                                                           
+B003  HDFC                 AGRAROAD                       AGRA                 U.P                  04-FEB-98                                                                                           
+B004  DENABANK             CGROAD                         AHMEDABAD            GUJARAT              20-SEP-12                                                                                           
+B005  ICICI                MAJAVDIROAD                    JUNAGADH             GUJARAT              07-MAY-11                                                                                           
+B002  SBI                  BORIWALI ROAD                  MUMBAI               MAHARASHTRA          12-JAN-00                                                                                           
+B001  BOI                  JAGNATHROAD                    RAJKOT               GUJARAT              22-MAR-15                                                                                           
+
+SQL> SELECT * FROM BANK_BRANCH
+  2  ORDER BY BRANCH_STATE;
+
+BRANC BRANCH_NAME          BRANCH_ADDRESS                 BRANCH_CITY          BRANCH_STATE         BRANCH_OP                                                                                           
+----- -------------------- ------------------------------ -------------------- -------------------- ---------                                                                                           
+B001  BOI                  JAGNATHROAD                    RAJKOT               GUJARAT              22-MAR-15                                                                                           
+B005  ICICI                MAJAVDIROAD                    JUNAGADH             GUJARAT              07-MAY-11                                                                                           
+B004  DENABANK             CGROAD                         AHMEDABAD            GUJARAT              20-SEP-12                                                                                           
+B002  SBI                  BORIWALI ROAD                  MUMBAI               MAHARASHTRA          12-JAN-00                                                                                           
+B003  HDFC                 AGRAROAD                       AGRA                 U.P                  04-FEB-98                                                                                           
+
+SQL> ALTER TABLE BANK_BRANCH
+  2  MODIFY BRANCH_STATE VARCHAR2(30);
+
+Table altered.
+
+SQL> COMMIT;
+
+Commit complete.
+
+SQL> UPDATE BANK_BRANCH
+  2  SET BRANCH_NAME = 'UNION'
+  3  WHERE BRANCH_ID = 'B003';
+
+1 row updated.
+
+SQL> COMMIT;
+
+Commit complete.
+
+SQL> UPDATE BANK_BRANCH
+  2  SET BRANCH_STATE = 'DELHI'
+  3  WHERE BRANCH_NAME = 'BOI';
+
+1 row updated.
+
+SQL> COMMIT;
+
+Commit complete.
+
+SQL> UPDATE BANK_BRANCH
+  2  SET BRANCH_OPEN_DATE = TO_DATE('04-NOV-2015','DD-MON-YYYY')
+  3  WHERE BRANCH_NAME = 'UNION';
+
+1 row updated.
+
+SQL> ALTER TABLE BANK_BRANCH
+  2  ADD PINCODE NUMBER(6);
+
+Table altered.
+
+SQL> UPDATE BANK_BRANCH
+  2  SET PINCODE = 360006
+  3  WHERE BRANCH_NAME = 'DENABANK';
+
+1 row updated.
+
+SQL> DELETE FROM BANK_BRANCH
+  2  WHERE BRANCH_OPEN_DATE = TO_DATE('07-MAY-2011','DD-MON-YYYY');
+
+1 row deleted.
+
+SQL> RENAME BANK_BRANCH TO BRANCH_MASTER;
+
+Table renamed.
+
+SQL> DESC BRANCH_MASTER;
+ Name                                                                                                              Null?    Type
+ ----------------------------------------------------------------------------------------------------------------- -------- ----------------------------------------------------------------------------
+ BRANCH_ID                                                                                                                  VARCHAR2(5)
+ BRANCH_NAME                                                                                                                VARCHAR2(20)
+ BRANCH_ADDRESS                                                                                                             VARCHAR2(30)
+ BRANCH_CITY                                                                                                                VARCHAR2(20)
+ BRANCH_STATE                                                                                                               VARCHAR2(30)
+ BRANCH_OPEN_DATE                                                                                                           DATE
+ PINCODE                                                                                                                    NUMBER(6)
+
+SQL> CREATE TABLE BRANCH_INFO AS
+  2  SELECT * FROM BRANCH_MASTER;
+
+Table created.
+
+SQL> SPOOL OFF;
